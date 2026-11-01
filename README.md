@@ -5,8 +5,11 @@ Requirements:
 Setup:
 
 Create and activate a virtual environment:
+
    python -m venv .venv
+   
    .venv\Scripts\activate        # Windows
+   
    source .venv/bin/activate     # macOS / Linux
 
 Install the dependencies:
