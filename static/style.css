@@ -1,0 +1,179 @@
+:root {
+  --enamel: #e4eeef;
+  --panel: #f7fbfb;
+  --ink: #10282e;
+  --muted: #55707a;
+  --pickle: #2f7a3e;
+  --butter: #f6d84c;
+  --beet: #b0305a;
+  --line: #bfd2d6;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--enamel);
+  color: var(--ink);
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 5rem;
+}
+
+h1, h2 {
+  font-family: "Bricolage Grotesque", "DM Sans", sans-serif;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 8vw, 4rem);
+  font-weight: 800;
+  margin: 0 0 0.75rem;
+}
+
+header p { color: var(--muted); max-width: 46ch; margin: 0 0 2rem; }
+
+/* Fridge shelf */
+.fridge {
+  background: var(--panel);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.shelf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  min-height: 4.5rem;
+  padding: 0.75rem;
+  border-bottom: 4px solid var(--line);
+  cursor: text;
+}
+
+.chips {
+  display: contents;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chips li { list-style: none; }
+
+.chip {
+  font: inherit;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--butter);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.chips li:nth-child(3n+1) .chip { transform: rotate(-2deg); }
+.chips li:nth-child(3n+2) .chip { transform: rotate(1.5deg); background: #bfe3c4; }
+.chips li:nth-child(3n)   .chip { transform: rotate(-0.5deg); background: #f3b9cb; }
+
+.chip:hover { text-decoration: line-through; }
+
+#ingredient-input {
+  flex: 1 1 14rem;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: var(--ink);
+  padding: 0.4rem 0.2rem;
+}
+
+#ingredient-input:focus { outline: none; }
+.shelf:focus-within { border-bottom-color: var(--pickle); }
+
+.hint { color: var(--muted); font-size: 0.9rem; margin: 0.75rem 0.75rem 1.25rem; }
+
+#go {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  background: var(--pickle);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+}
+
+#go:hover:not(:disabled) { background: #256332; }
+#go:disabled { background: #9db5ab; cursor: not-allowed; }
+
+:focus-visible { outline: 3px solid var(--beet); outline-offset: 2px; }
+
+/* Status and errors */
+.status {
+  margin: 1.5rem 0 0;
+  padding: 0.8rem 1rem;
+  border-left: 5px solid var(--beet);
+  background: #f9e3ea;
+}
+
+/* Recipes */
+#results { margin-top: 3rem; }
+
+.recipe {
+  padding: 2rem 0;
+  border-top: 2px solid var(--ink);
+}
+
+.recipe h2 { font-size: 2rem; font-weight: 800; margin: 0 0 0.25rem; }
+.meta { color: var(--muted); margin: 0 0 1rem; font-weight: 500; }
+
+.taglist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.taglist-label { font-weight: 700; margin-right: 0.3rem; font-size: 0.95rem; }
+
+.tag {
+  font-size: 0.9rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--pickle);
+  background: #d4ecd8;
+}
+
+.tag.missing {
+  border: 1.5px dashed var(--beet);
+  background: transparent;
+}
+
+.steps { margin: 1.25rem 0 0; padding-left: 1.4rem; max-width: 62ch; }
+.steps li { margin-bottom: 0.6rem; padding-left: 0.3rem; }
+.steps li::marker { font-weight: 700; color: var(--pickle); }
+
+.note {
+  border-top: 2px solid var(--ink);
+  padding-top: 1.5rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; }
+}
