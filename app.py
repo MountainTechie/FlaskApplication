@@ -6,12 +6,16 @@ from flask import Flask, jsonify, render_template, request
 from google import genai
 from google.genai import errors, types
 
-# Load .env from the same folder as this file, wherever you start the terminal
-load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
+# Load .env from the same folder as this file; .env wins over system variables
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(BASE_DIR, ".env"), override=True)
 
 app = Flask(__name__)
-client = genai.Client()  # reads GEMINI_API_KEY from the environment
+API_KEY = (os.getenv("GEMINI_API_KEY") or "").strip().strip("\"'")
+client = genai.Client(api_key=API_KEY)
 MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
+print(f"[startup] .env: {os.path.join(BASE_DIR, '.env')} | "
+      f"key length: {len(API_KEY)} | starts: {API_KEY[:4]} | ends: {API_KEY[-2:]} | model: {MODEL}")
 
 SYSTEM_PROMPT = """You are a practical home-cooking assistant.
 The user lists ingredients they have. Suggest 3 dishes they can cook.
